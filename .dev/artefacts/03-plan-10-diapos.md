@@ -1,6 +1,6 @@
 # Plan de présentation en dix diapos
 
-> **Document de travail pour l'équipe de préparation (noumanity&co).** Plan détaillé diapo par diapo. Il met en oeuvre la tactique de communication du récit ([02](02-argumentaire-recit.md)) ; le verbatim est en [04](04-verbatim-par-diapo.md) ; les objectifs de communication en [01](01-objectifs-de-communication.md). Chaque diapo porte un objectif propre, un message pour les décideurs en cybersécurité, un message pour la communauté Linux, et une déclinaison du leitmotiv.
+> **Document de travail pour l'équipe de préparation (noumanity&co).** Plan détaillé diapo par diapo. Il met en oeuvre la tactique de communication du récit ([02](02-argumentaire-recit.md)) ; le verbatim est en [04](04-verbatim-par-diapo.md) ; le plan de communication en [01](01-plan-de-communication.md). Chaque diapo porte un objectif propre, un message pour les décideurs en cybersécurité, un message pour la communauté Linux, et une déclinaison du leitmotiv.
 
 ## Conventions
 

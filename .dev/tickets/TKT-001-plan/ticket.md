@@ -325,3 +325,34 @@ Mettre à jour les documents `@.dev/artefacts/*`
 - ne pas toucher à 01
 - mettre 02 et 03 au propre pour une audience noumanity&co (équipe de préparation de la présentation) en tenant compte des directives et commentaires du ticket
 - dans 04-verbatim, estimer le temps nécessaire pour présenter chaque diapositive
+
+### 4. Pré-requis au plan de communication
+
+Produire un Essai de Fondation Exhaustif à propos du plan de communication
+
+Tenir compte des cadres théoriques et méthodologiques suivants:
+- communication stratégique
+- communication professionnelle
+- analyse bourdieusienne (identifier les champs pertinents, les acteurs et positions dans chaque champs, leurs pratiques, habitus, capital, illusio et doxa)
+- les pilliers de la communication
+
+
+Rechercher et inclure tous les autres cadres théoriques pertinents qui n'ont pas été mentionnés ci-haut.
+
+Adapté pour les contextes: 
+- développement d'affaire en technologie de l'information, cybersécurité, en grande entreprise et gouvernemental
+- communauté techniques
+- communauté linux
+- ville de Québec
+- startup de service
+- posture de leadership
+
+### 5. Plan de communication
+
+01 objectifs de comm devient => Plan de communication
+
+S'appuyer sur le cadre théorique de  FND-012
+
+- extraire les éléments de tactique de comm du document "02 récit" et les inclure dans le plan de communication
+
+Dans le répertoire du ticket, produire une analyse critique de "03 plan de présentation" en confrontant les éléments théorique de FND-012, les objectifs de comm de 02 et la performance envisagée par 03.

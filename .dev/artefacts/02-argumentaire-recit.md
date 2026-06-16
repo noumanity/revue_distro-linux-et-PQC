@@ -1,6 +1,6 @@
 # Argumentaire et récit de la présentation
 
-> **Document de travail pour l'équipe de préparation (noumanity&co).** Il fixe la thèse, la tactique de communication et le fil narratif que la présentation doit supporter. Il se lit avec le plan ([03](03-plan-10-diapos.md)) et le verbatim ([04](04-verbatim-par-diapo.md)) ; les objectifs de communication sont dans [01](01-objectifs-de-communication.md). Sources factuelles : [FND-008](../fondations/FND-008-usages-de-linux.md), [FND-009](../fondations/FND-009-pqc-par-categorie-dimages.md), [FND-010](../fondations/FND-010-risque-quantique-notion-et-prise-en-charge.md), [FND-011](../fondations/FND-011-pqc-soixante-images-par-categorie.md), [FND-006](../fondations/FND-006-outils-cbom-scan-panorama-comparaison.md).
+> **Document de travail pour l'équipe de préparation (noumanity&co).** Il fixe la thèse, la tactique de communication et le fil narratif que la présentation doit supporter. Il se lit avec le plan ([03](03-plan-10-diapos.md)) et le verbatim ([04](04-verbatim-par-diapo.md)) ; le plan de communication (objectifs et stratégie) est dans [01](01-plan-de-communication.md). Sources factuelles : [FND-008](../fondations/FND-008-usages-de-linux.md), [FND-009](../fondations/FND-009-pqc-par-categorie-dimages.md), [FND-010](../fondations/FND-010-risque-quantique-notion-et-prise-en-charge.md), [FND-011](../fondations/FND-011-pqc-soixante-images-par-categorie.md), [FND-006](../fondations/FND-006-outils-cbom-scan-panorama-comparaison.md).
 
 ## 1. La thèse (une phrase)
 
