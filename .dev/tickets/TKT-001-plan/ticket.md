@@ -111,3 +111,41 @@ OpenSSL, GnuTLS, OpenSSH, le noyau
 
 
 #### Section Démo : 
+
+...
+
+## Tâches
+
+### 1. Avancer vers le plan de la présentation
+
+#### Contexte
+
+Je sais exactement (du moins intuitivement) ce que je veux communiquer. Mais lorsque je tente de le mettre par écrit, j'ai de la difficulté. Voici ce qui se produit:
+
+- J'ai trop d'idées alors la sélection du contenu pour que ce ne soit pas trop long est difficile,
+- Mon premier réflexe est de tout mettre sur la table (divergence) pour en extraire l'essentiel par la suite (convergence).
+- Je suis convaicu que cette méthode est bonne et adaptée à ma façon de penser. Mais, d'un point de vue opérationnel, ça cause des difficultés parce que:
+  - c'est trop long
+  - je continue toujours à diverger, ça n'arrête jamais,
+  - il faut que je mette un frein à la divergence, mais ça fait que mon travail n'est pas fini et ça me frustre et je ne suis pas satisfait.
+  - j'accorde peut-être trop d'importance à terminer à la perfection les étapes intermédiaires de travail...
+
+La section "## structure" se voulait d'abord une ébeauche de plan de présentation, puis le contenu des 10 diapos, puis s'est transformé finalement en ébeauche d'un document complet sur PQC + Linux...
+
+Je dois rapidement recentrer le travail. Voici ce que nous allons faire =>
+
+#### TODO
+
+1. Clarifier les objectifs de communication et les mettre au centre de notre travail pour accélérer:
+
+- objectif ultime: être perçu comme la référence en matière PQC par les décideurs en cybersécurité
+- objectif opérationnel: livrer et performer une présentation intéressante et irréprochable à la communauté linux du Québec
+
+2. Produire l'argumentaire / le récit que la présentation doit supporter (end in mind, what matters)
+
+3. Produire un plan de présentation en 10 diapos.
+
+4. Pour chaque diapo, produire le contenu détaillé sous forme de verbatim.
+
+Mettre ces 4 livrables dans le répertoire `@.dev/artefacts`. 
+ 

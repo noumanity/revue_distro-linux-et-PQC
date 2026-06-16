@@ -16,3 +16,13 @@ assets/
 .dev/tickets/TKT-002*
 .dev/tickets/TKT-003*
 .dev/tickets/TKT-004*
+
+
+# Démo
+
+## cache trivy
+demo/trivy-cache/
+
+
+## résultats
+demo/results/
