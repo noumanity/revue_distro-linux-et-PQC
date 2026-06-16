@@ -37,3 +37,38 @@ Ajuster FND-006 au besoin.
 
 Répondre à la question 5 pour CBOMkit.
 
+### 4. Choix de la démonstration
+
+Voici ce qui a été promis:
+
+> Enfin, nous terminerons par une présentation technique portant sur la vérification de l'intégration de la Cryptographie Post-Quantique (PQC) sur les images et les conteneurs Linux.
+
+Voici les autres présentations:
+
+- LM Studio: Déployer des modèles IA locaux par [Dany Dubé](https://www.linkedin.com/in/dany-dub%C3%A9-b797ab126/)
+- Est-il temps de quitter BitWarden et pourquoi? par [Alexandre Blanc](https://www.linkedin.com/in/alexandre-blanc-cyber-security-88569022/)
+- Cycle de vie des mots de passe avec KeePass par [Jonathan Cyr](https://www.linkedin.com/in/jonathan-cyr-872242/)
+
+Présentatrice: Ikram, étudiante en génie logiciel. Sur poste windows avec docker
+
+
+Le répertoire du démo @demo/
+
+Contraintes à respecter:
+
+- la démo doit être environ 10 minute
+- simple, maximum 2 cas illustrés
+- si possible résonne avec les autres présentations (keepass)
+- au niveau de présentatrice
+
+
+TODO: proposer 3 possibilités de démonstration et les décrire
+
+### 5. Option D: keepass
+
+Ajoutons une 4e options aux choix de démo
+
+Pour faire un clin d'oeil aux autres présentateurs, faire un exemple sur keepass.
+
+- PQC par défaut? comment vérifier?
+- Possible d'avoir un keepass-pqc? Comment le configurer + script de migration
