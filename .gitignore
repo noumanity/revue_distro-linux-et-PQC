@@ -1,4 +1,18 @@
 .claude
-.dev
 
-workdir
+# repertoire de travail (test demo)
+workdir/
+
+# assets pour la préparation du ppt
+assets/
+
+# non pertinent pour la préparation de la présentation
+.dev/adr/ADR-001*
+.dev/adr/ADR-002*
+.dev/fondations/FND-002*
+.dev/fondations/FND-003*
+.dev/fondations/FND-004*
+.dev/fondations/FND-005*
+.dev/tickets/TKT-002*
+.dev/tickets/TKT-003*
+.dev/tickets/TKT-004*
