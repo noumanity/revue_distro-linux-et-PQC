@@ -7,6 +7,7 @@
 # repertoire de travail (test demo)
 workdir/
 .dev
+assets/
 
 # non pertinent pour la préparation de la présentation
 .dev/adr/ADR-001*
