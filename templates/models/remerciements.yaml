@@ -1,0 +1,33 @@
+name: remerciements
+description: "Diapositive de clôture : message de remerciement, appel aux questions, code QR"
+fields:
+  content:
+    required: []
+    optional:
+      - name: message
+        description: "Texte affiché en haut de la diapositive"
+        type: string
+      - name: focus
+        description: "Mot ou phrase centrale, affiché en très grand"
+        type: string
+      - name: qr-url
+        description: "URL encodée dans le code QR (affiché en bas à droite)"
+        type: string
+      - name: qr-label
+        description: "Texte sous le code QR (défaut : la valeur de qr-url)"
+        type: string
+  params:
+    optional: []
+notes: >
+  Le code QR est affiché en bas à droite, hauteur 1/5 de la hauteur totale (1.9cm).
+  Si qr-label est absent, l'URL est affichée telle quelle sous le code QR.
+  Le champ focus apparaît en NoumanityOrange pour maximiser l'impact visuel.
+example: |
+  ---
+  diapo:
+    model: remerciements
+  content:
+    message: "Merci de votre attention"
+    focus: "Questions?"
+    qr-url: "https://example.com/repo"
+  ---

@@ -45,9 +45,10 @@ local function tex_escape(s)
 end
 
 local function inline_md(s)
-  s = s:gsub("%*%*(.-)%*%*", "\\textbf{%1}")
-  s = s:gsub("%*(.-)%*",     "\\emph{%1}")
-  s = s:gsub("`(.-)`",       "\\texttt{%1}")
+  s = s:gsub("%*%*%*(.-)%*%*%*", "\\textbf{\\emph{%1}}")
+  s = s:gsub("%*%*(.-)%*%*",     "\\textbf{%1}")
+  s = s:gsub("%*(.-)%*",         "\\emph{%1}")
+  s = s:gsub("`(.-)`",           "\\texttt{%1}")
   return s
 end
 
@@ -639,6 +640,12 @@ local function build_ctx(meta, body, config, root, workdir_assets)
   ctx["date_tex"]     = tex_escape(ctx["date"])
   ctx["demo_tex"]     = tex_escape(ctx["demo"])
   ctx["location_tex"] = tex_escape(ctx["location"])
+  ctx["message_tex"]  = inline_md(tex_escape(ctx["message"]))
+  ctx["focus_tex"]    = inline_md(tex_escape(ctx["focus"]))
+  local qr_url_raw    = (type(ctx["qr-url"]) == "string") and ctx["qr-url"] or ""
+  ctx["qr_url"]       = qr_url_raw
+  local qr_label_src  = (type(ctx["qr-label"]) == "string") and ctx["qr-label"] or qr_url_raw
+  ctx["qr_label_tex"] = tex_escape(qr_label_src:gsub("^https?://", ""))
 
   -- Logos
   local logos_raw = ctx["logos"] or {}
