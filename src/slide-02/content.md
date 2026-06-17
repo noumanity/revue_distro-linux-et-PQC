@@ -4,7 +4,7 @@ diapo:
   variations: 3
 content:
   title: "Repenser la menace comme un risque"
-  section: "Au-delà de fragilité cryptographique: la réponses de l'industrie"
+  section: "Au-delà de fragilité cryptographique : la réponse de l'industrie"
 ---
 
 - Le « risque quantique » est un **déclencheur**, pas le sujet

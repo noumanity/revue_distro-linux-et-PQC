@@ -618,21 +618,18 @@ local function build_table_tex(rows, col_specs)
   out[#out+1] = "\\small\\begin{tabular}{" .. table.concat(col_parts) .. "}"
   out[#out+1] = "\\toprule"
   for ri, row in ipairs(rows) do
+    -- Lignes impaires (1, 3, 5...) : fond coloré via \cellcolor (fiable dans Beamer).
+    -- \rowcolor est moins fiable car Beamer peut écraser les couleurs de lignes.
+    local colored = (ri % 2) == 1
     local cells = {}
     for ci = 1, ncols do
       local cell = inline_md(tex_escape((row[ci] or ""):match("^%s*(.-)%s*$") or ""))
-      cells[#cells+1] = ri == 1 and ("\\textbf{" .. cell .. "}") or cell
+      if ri == 1 then cell = "\\textbf{" .. cell .. "}" end
+      if colored then cell = "\\cellcolor{red!20}" .. cell end
+      cells[#cells+1] = cell
     end
-    local row_line = table.concat(cells, " & ") .. " \\\\"
-    if ri == 1 then
-      out[#out+1] = row_line
-      out[#out+1] = "\\midrule"
-    elseif (ri % 2) == 0 then
-      -- lignes paires de données (1re, 3e, 5e...) : fond très pâle
-      out[#out+1] = "\\rowcolor{NoumanityBlack!5}" .. row_line
-    else
-      out[#out+1] = row_line
-    end
+    out[#out+1] = table.concat(cells, " & ") .. " \\\\"
+    if ri == 1 then out[#out+1] = "\\midrule" end
   end
   out[#out+1] = "\\bottomrule"
   out[#out+1] = "\\end{tabular}"

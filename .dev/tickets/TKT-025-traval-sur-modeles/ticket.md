@@ -87,7 +87,15 @@ Ensuite converti toutes les variations qui on des tableau vers le modèle `table
 
 Appliquer une couleur de fond à toutes les lignes impair.
 
-### 10. Fix numérotation
+### 10. bug
+
+Pourquoi ça ne marche pas?
+
+Je ne vois pas la couleur sur le pdf.
+
+Utiliser le rose pour tester
+
+### 11. Fix numérotation
 
 La numérotation n'est pas correcte.
 
@@ -100,7 +108,17 @@ ordre: suivre l'ordre séquentiel ascendant des diapos de type `plain` ou dériv
 
 pour l'incrémentation, on considère: la diapo courante et la 
 
+pour la première diapo / section , on commence à 1
 
 1. incrément de section
 
+à chaque fois que la section courrante est différente de la section précédente, X = X+1
 
+2. incrément de diapo
+
+à chaque fois que la diapo courrante est différente de la diapo précédente, Y = Y+1
+
+### 12. glitch
+
+- remettre en gris (noir noumanity 10%)
+- mettre la couleur sur les lignes pair
