@@ -10,6 +10,7 @@ Ce fichier résume comment travailler dans ce dépôt. Les sources de vérité s
    - pas de retour à la ligne manuel dans un paragraphe : un paragraphe tient sur une seule ligne source, et les blocs sont séparés par une ligne vide (deux lignes adjacentes fusionnent au rendu).
    - ne jamais utiliser le tiret cadratin (em dash, U+2014) ni le tiret demi-cadratin (U+2013) ; reformuler, ou employer parenthèses, deux points, ou un tiret simple entouré d'espaces.
 3. **Livrable d'abord** : avant d'exécuter une tâche, identifier le type de livrable à produire ; son skill fixe alors le processus et les critères de qualité.
+4. **Programmation et design conformes** : toute écriture ou révision de code du générateur de présentation (`scripts/dev.sh`, `activate`, prétraitement, `templates/`, thème) et toute décision de design de diapositive suivent `skl-004-programmation-et-design`. Ce skill consolide le stack (ADR-001), les principes de conception (ADR-002) et le cadre de design (FND-015). En particulier : LuaLaTeX plus Beamer plus metropolis, prétraitement bash plus Lua (texlua, lunamark, etlua), **ni Python ni pandoc**, aucune valeur de marque codée en dur (tout via `branding.yml` et `config.yaml`).
 
 ## Méthodologie de tickets (résumé d'ADR-003)
 
@@ -20,7 +21,7 @@ Arborescence `.dev/` :
 - `tickets/` : sujets de travail (un dossier par ticket).
 - `adr/` : décisions d'architecture et de conception.
 - `fondations/` : essais de recherche en profondeur, sourcés.
-- `skills/` : un playbook par type de livrable.
+- `skills/` : un playbook par type de livrable, plus des skills de processus (ex. `skl-004-programmation-et-design`, garde-fou de conformité du code et du design).
 - `CONSTITUTION.md` : règles impératives. `CLAUDE.md` : ce guide.
 
 ## Catalogue des livrables et leur skill (ADR-003 §D5)
@@ -33,6 +34,8 @@ Arborescence `.dev/` :
 | Skill | `skills/skl-<XYZ>-<slug>/SKILL.md` | auto-décrit (format Agent Skills) |
 
 Le `ticket.md` et `CONSTITUTION.md` ne sont pas des livrables produits par l'agent.
+
+Outre les skills de type de livrable ci-dessus, `skl-004-programmation-et-design` est un **skill de processus** (garde-fou) : il ne produit pas un livrable dédié mais conditionne toute programmation du générateur et tout choix de design (cf. règle impérative 4).
 
 ## Conventions de nommage (ADR-003 §D3 et §D6)
 

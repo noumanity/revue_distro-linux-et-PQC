@@ -1,49 +1,46 @@
-% beamerthemeNoumanity.sty - Thème Beamer Noumanity (prototype)
+% beamerthemeNoumanity.sty - Theme Beamer Noumanity, extension de metropolis
 % Couleurs : branding.yml (orange #FA4D1F, noir #000000)
-% Polices  : Latin Modern (prototype) ; remplacer par fontspec + Arimo/ABeeZee avec lualatex.
+% Polices  : ABeeZee (titres) + Arimo (corps) si installes ; repli Latin Modern.
+% Conforme ADR-001 : base metropolis, fontspec, LuaLaTeX.
 \mode<presentation>
 
-\RequirePackage{xcolor}
-\RequirePackage{graphicx}
-\RequirePackage{tikz}
+% Charger metropolis comme base
+\usetheme{metropolis}
 
-% --- Couleurs de marque ---
+% Couleurs de marque (topologie : 2 couleurs + neutres techniques)
 \definecolor{NoumanityOrange}{HTML}{FA4D1F}
 \definecolor{NoumanityBlack}{HTML}{000000}
 \definecolor{NoumanityWhite}{HTML}{FFFFFF}
 
-\setbeamercolor{normal text}{fg=NoumanityBlack, bg=NoumanityWhite}
+% Surcharge de la palette metropolis
+\setbeamercolor{frametitle}{bg=NoumanityOrange, fg=NoumanityWhite}
+\setbeamercolor{progress bar}{fg=NoumanityOrange, bg=NoumanityBlack!25}
+\setbeamercolor{title separator}{fg=NoumanityOrange}
+\setbeamercolor{alerted text}{fg=NoumanityOrange}
 \setbeamercolor{structure}{fg=NoumanityOrange}
-\setbeamercolor{frametitle}{fg=NoumanityWhite, bg=NoumanityOrange}
-\setbeamercolor{title}{fg=NoumanityOrange, bg=NoumanityWhite}
 \setbeamercolor{item}{fg=NoumanityOrange}
-\setbeamercolor{subitem}{fg=NoumanityOrange}
-\setbeamercolor{block title}{fg=NoumanityWhite, bg=NoumanityOrange}
-\setbeamercolor{block body}{fg=NoumanityBlack, bg=NoumanityWhite!92!NoumanityOrange}
+\setbeamercolor{subitem}{fg=NoumanityOrange!80}
+\setbeamercolor{block title}{bg=NoumanityOrange, fg=NoumanityWhite}
+\setbeamercolor{block body}{bg=NoumanityBlack!5}
 
-% --- Pas de symboles de navigation ---
-\setbeamertemplate{navigation symbols}{}
+% Polices de marque via fontspec (LuaLaTeX)
+% ABeeZee = titres et emphases fortes ; Arimo = corps (Google Fonts libres)
+% IfFontExistsTF : charge la police si disponible, repli silencieux sinon.
+\IfFontExistsTF{Arimo}{%
+  \setsansfont{Arimo}[
+    BoldFont = Arimo Bold,
+    ItalicFont = Arimo Italic,
+    BoldItalicFont = Arimo Bold Italic
+  ]
+  \setmainfont{Arimo}
+}{}
+\IfFontExistsTF{ABeeZee}{%
+  \setbeamerfont{title}{family={\fontspec{ABeeZee}}, size=\Large}
+  \setbeamerfont{frametitle}{family={\fontspec{ABeeZee}}, size=\large}
+}{}
 
-% --- Pied de page : numéro de diapo à droite ---
-\setbeamertemplate{footline}{%
-  \hfill{%
-    \usebeamerfont{footline}%
-    \color{NoumanityBlack!60}%
-    \insertframenumber\,/\,\inserttotalframenumber%
-    \hspace{0.6em}\vspace{0.35em}%
-  }%
-}
-
-% --- Titre de frame avec bandeau orange ---
-\setbeamertemplate{frametitle}{%
-  \nointerlineskip%
-  \begin{beamercolorbox}[wd=\paperwidth,ht=0.65cm,dp=0.18cm,leftskip=0.5cm]{frametitle}%
-    \usebeamerfont{frametitle}\insertframetitle%
-  \end{beamercolorbox}%
-}
-
-% --- Listes ---
+% Listes : puces avec couleur de marque
 \setbeamertemplate{itemize item}{\textcolor{NoumanityOrange}{\textbullet}}
-\setbeamertemplate{itemize subitem}{\textcolor{NoumanityOrange}{\textendash}}
+\setbeamertemplate{itemize subitem}{\textcolor{NoumanityOrange!80}{\textendash}}
 
 \mode<all>

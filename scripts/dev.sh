@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-# dev.sh - outil de génération de la présentation
+# dev.sh - outil de generation de la presentation
 #
-# Usage (après `. activate`) :
-#   dev.sh gen      - génère dist/presentation.pdf
+# Usage (apres `. activate`) :
+#   dev.sh gen      - genere dist/presentation.pdf
 #   dev.sh clean    - vide workdir/
 #   dev.sh --help   - affiche ce message
 #
-# Variable attendue : PRESENTATION_ROOT (positionnée par `. activate`)
+# Stack (ADR-001) : texlua + LuaLaTeX + Beamer + metropolis. Ni Python ni pandoc.
+# Variable attendue : PRESENTATION_ROOT (positionnee par `. activate`)
 
 set -euo pipefail
 
@@ -29,24 +30,25 @@ clean() {
            "$WORKDIR"/*.aux "$WORKDIR"/*.log \
            "$WORKDIR"/*.nav "$WORKDIR"/*.snm \
            "$WORKDIR"/*.toc "$WORKDIR"/*.out \
+           "$WORKDIR"/*.fdb_latexmk "$WORKDIR"/*.fls \
            "$WORKDIR"/build.log 2>/dev/null || true
-    echo "[OK] workdir nettoyé"
+    echo "[OK] workdir nettoye"
 }
 
 gen() {
     mkdir -p "$WORKDIR_TEX" "$WORKDIR_ASSETS" "$DIST"
 
-    # Copier le thème dans workdir/ pour que pdflatex le trouve
+    # Copier le theme dans workdir/ pour que lualatex le trouve
     cp "$TEMPLATES/theme/"*.sty "$WORKDIR/"
 
-    # Rendre chaque slide
+    # Rendre chaque slide avec texlua
     local slide_tex_files=()
     for slide_dir in "$SLIDES_SRC"/slide-*/; do
         local content_md="$slide_dir/content.md"
         [ -f "$content_md" ] || continue
         local name; name=$(basename "$slide_dir")
         local out="$WORKDIR_TEX/${name}.tex"
-        python3 "$ROOT/scripts/render_slide.py" \
+        texlua "$ROOT/scripts/render_slide.lua" \
             "$content_md" \
             "$ROOT/config.yaml" \
             "$out" \
@@ -56,11 +58,11 @@ gen() {
     done
 
     if [ ${#slide_tex_files[@]} -eq 0 ]; then
-        echo "[ERREUR] Aucun content.md trouvé dans $SLIDES_SRC/slide-*/" >&2
+        echo "[ERREUR] Aucun content.md trouve dans $SLIDES_SRC/slide-*/" >&2
         exit 1
     fi
 
-    # Générer workdir/main.tex
+    # Generer workdir/main.tex (preamble + inputs des slides)
     local main_tex="$WORKDIR/main.tex"
     {
         cat "$TEMPLATES/preamble.tex"
@@ -71,17 +73,23 @@ gen() {
         echo '\end{document}'
     } > "$main_tex"
 
-    # Compiler (deux passes pour les références croisées Beamer)
-    local compile_cmd
-    compile_cmd="pdflatex -interaction=nonstopmode -output-directory=$WORKDIR $main_tex"
-    $compile_cmd > "$WORKDIR/build.log" 2>&1
-    $compile_cmd >> "$WORKDIR/build.log" 2>&1
+    # Compiler avec lualatex (2 passes pour les refs croisees Beamer)
+    # latexmk prefere si disponible (gere biber, overlays, etc.)
+    if command -v latexmk >/dev/null 2>&1; then
+        latexmk -lualatex -outdir="$WORKDIR" -interaction=nonstopmode "$main_tex" \
+            > "$WORKDIR/build.log" 2>&1
+    else
+        lualatex -interaction=nonstopmode -output-directory="$WORKDIR" "$main_tex" \
+            > "$WORKDIR/build.log" 2>&1
+        lualatex -interaction=nonstopmode -output-directory="$WORKDIR" "$main_tex" \
+            >> "$WORKDIR/build.log" 2>&1
+    fi
 
     if [ -f "$WORKDIR/main.pdf" ]; then
         cp "$WORKDIR/main.pdf" "$DIST/presentation.pdf"
-        echo "[OK] dist/presentation.pdf généré"
+        echo "[OK] dist/presentation.pdf genere"
     else
-        echo "[ERREUR] Compilation LaTeX échouée - voir workdir/build.log" >&2
+        echo "[ERREUR] Compilation LuaLaTeX echouee - voir workdir/build.log" >&2
         tail -40 "$WORKDIR/build.log" >&2
         exit 1
     fi

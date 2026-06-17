@@ -1,18 +1,19 @@
-# config.yaml - paramètres globaux de la présentation
-# Consommé par scripts/render_slide.py (tous les slides).
-# Un champ défini dans l'en-tête YAML d'un slide l'emporte sur ce fichier.
+# config.yaml - parametres globaux de la presentation
+# Consomme par scripts/render_slide.lua (tous les slides).
+# Un champ defini dans l'en-tete YAML d'un slide l'emporte sur ce fichier.
+# Encoding : UTF-8 (tinyyaml ne supporte pas les sequences \xNN).
 
-title:    "Comment les distributions Linux s'adaptent-elles au \xABrisque quantique\xBB ?"
+title:    "Comment les distributions Linux s'adaptent-elles au risque quantique ?"
 subtitle: "Cryptographie post-quantique et feuilles de route"
 
 authors:
-  - "J\xE9r\xE9my Viau-Trudel - Sp\xE9cialiste DevSecOps"
-  - "Andr\xE9 Gerges - Conseiller en recherche en cybers\xE9curit\xE9 et conformit\xE9"
+  - "Jeremy Viau-Trudel - Specialiste DevSecOps"
+  - "Andre Gerges - Conseiller en recherche en cybersecurite et conformite"
 
-demo:     "Ikram Zahiri - \xC9tudiante en g\xE9nie logiciel"
+demo:     "Ikram Zahiri - Etudiante en genie logiciel"
 date:     "17 juin 2026"
-event:    "Rencontres Linux du Qu\xE9bec"
-location: "Qu\xE9bec, QC"
+event:    "Rencontres Linux du Quebec"
+location: "Quebec, QC"
 
-# Modèle Beamer par défaut si absent de l'en-tête slide.
+# Modele Beamer par defaut si absent de l'en-tete slide.
 default_model: plain

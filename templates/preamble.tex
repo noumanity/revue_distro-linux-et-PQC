@@ -1,13 +1,17 @@
 \documentclass[aspectratio=169]{beamer}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\usepackage{fontspec}
 \usepackage[french]{babel}
+\usepackage{csquotes}
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{xcolor}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{qrcode}
 
-% Macro émise par pandoc pour les listes compactes (sinon « Undefined control sequence »)
+% Macro pour les listes compactes (produite par le renderer Lua)
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
-% Thème Noumanity (beamerthemeNoumanity.sty copié dans workdir/ par dev.sh gen)
+% Theme Noumanity (etend metropolis ; copie dans workdir/ par dev.sh gen)
 \usetheme{Noumanity}

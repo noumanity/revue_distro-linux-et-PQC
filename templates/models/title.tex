@@ -1,8 +1,8 @@
-% Modèle : title - page de titre
+% Modele : title - page de titre
 % Champs obligatoires : title_tex, subtitle_tex, authors_formatted, event_tex, date_tex
 % Champs optionnels  : background_block, demo_tex, logos_formatted
 \begin{frame}[plain]
-{{background_block}}
+<%- background_block %>
 \begin{tikzpicture}[remember picture, overlay]
   \fill[NoumanityBlack, opacity=0.58]
     (current page.south west) rectangle (current page.north east);
@@ -10,19 +10,19 @@
 
 \vfill
 \begin{center}
-  {\Large\bfseries\color{white} {{title_tex}}\par}
+  {\Large\bfseries\color{white} <%- title_tex %>\par}
   \smallskip
-  {\normalsize\itshape\color{NoumanityOrange} {{subtitle_tex}}\par}
+  {\normalsize\itshape\color{NoumanityOrange} <%- subtitle_tex %>\par}
   \medskip
   \textcolor{NoumanityOrange}{\rule{0.5\linewidth}{0.4pt}}\par
   \medskip
-  {\small\color{white} {{authors_formatted}}\par}
+  {\small\color{white} <%- authors_formatted %>\par}
   \smallskip
-  {\footnotesize\color{white!75!NoumanityBlack} D\'{e}mo~: {{demo_tex}}\par}
+  {\footnotesize\color{white!75!NoumanityBlack} D\'{e}mo~: <%- demo_tex %>\par}
   \medskip
-  {\footnotesize\color{white!90!NoumanityBlack} {{event_tex}} -- {{date_tex}}\par}
+  {\footnotesize\color{white!90!NoumanityBlack} <%- event_tex %> -- <%- date_tex %>\par}
   \medskip
-  {{logos_formatted}}
+  <%- logos_formatted %>
 \end{center}
 \vfill
 \end{frame}

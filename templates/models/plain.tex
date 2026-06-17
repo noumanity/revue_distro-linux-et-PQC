@@ -1,8 +1,8 @@
-% Modèle : plain - titre + contenu libre (corps Markdown rendu en LaTeX)
+% Modele : plain - titre + contenu libre (corps Markdown rendu en LaTeX)
 % Champs obligatoires : title_tex, content
 % Champs optionnels  : background_block
 \begin{frame}
-{{background_block}}
-\frametitle{{{title_tex}}}
-{{content}}
+<%- background_block %>
+\frametitle{<%- title_tex %>}
+<%- content %>
 \end{frame}

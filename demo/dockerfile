@@ -1,0 +1,14 @@
+FROM redhat/ubi10-minimal:latest
+
+RUN microdnf install -y \
+    openssl \
+    ca-certificates \
+    crypto-policies \
+    crypto-policies-scripts \
+    crypto-policies-pq-preview \
+    grep \
+    && microdnf clean all
+
+RUN update-crypto-policies --set DEFAULT:TEST-PQ || true
+
+CMD ["/bin/sh"]
