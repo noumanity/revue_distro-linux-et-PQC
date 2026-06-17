@@ -8,3 +8,5 @@ default_model: plain
 
 # Couleur de fond globale (vide = aucun fond)
 background-color: '#EEE'
+
+title-font-color: '#000'

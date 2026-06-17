@@ -203,11 +203,11 @@ local function split_markdown_blocks(text)
   return blocks
 end
 
--- Organiser des blocs markdown en pages verbatim a 2 colonnes.
--- Heuristique par lignes virtuelles (retours a la ligne implicites inclus).
+-- Organiser des blocs markdown en pages verbatim 2 colonnes.
+-- Heuristique conservative pour eviter le clipping en PDF.
 local function paginate_verbatim_blocks(text)
-  local COL_WRAP_CHARS = 50
-  local MAX_COL_LINES = 22
+  local COL_WRAP_CHARS = 48
+  local MAX_COL_LINES = 14
 
   local function estimate_line_cost(line)
     local raw = line:gsub("^%s+", ""):gsub("%s+$", "")
@@ -215,7 +215,7 @@ local function paginate_verbatim_blocks(text)
     local extra = 0
     if raw:match("^%s*[%-%*]%s+") then extra = extra + 1 end
     if raw:match("^%s*#+%s+") then extra = extra + 1 end
-    if raw:match("^\textbf%b{}%s*$") then extra = extra + 1 end
+    if raw:match("^\\textbf%b{}%s*$") then extra = extra + 1 end
     local chars = #raw
     local wraps = math.max(1, math.ceil(chars / COL_WRAP_CHARS))
     return wraps + extra
@@ -308,12 +308,12 @@ local function paginate_verbatim_blocks(text)
     }
   end
 
-  local function push_to_left(block, cost)
+  local function push_left(block, cost)
     current_page.left_parts[#current_page.left_parts+1] = block
     current_page.left_cost = current_page.left_cost + cost
   end
 
-  local function push_to_right(block, cost)
+  local function push_right(block, cost)
     current_page.right_parts[#current_page.right_parts+1] = block
     current_page.right_cost = current_page.right_cost + cost
   end
@@ -323,20 +323,20 @@ local function paginate_verbatim_blocks(text)
     local placed = false
 
     if current_page.side == "left" and (current_page.left_cost + cost) <= MAX_COL_LINES then
-      push_to_left(block, cost)
+      push_left(block, cost)
       placed = true
     elseif current_page.side == "left" then
       current_page.side = "right"
     end
 
     if not placed and current_page.side == "right" and (current_page.right_cost + cost) <= MAX_COL_LINES then
-      push_to_right(block, cost)
+      push_right(block, cost)
       placed = true
     end
 
     if not placed then
       flush_page()
-      push_to_left(block, cost)
+      push_left(block, cost)
       current_page.side = "left"
     end
   end
@@ -700,19 +700,11 @@ local function main()
     local variations = parse_content_file(content_md)
     local first_meta = (variations[1] or { meta = {} }).meta
     local vbody      = read_verbatim_body(verbatim_md)
-    local base_ctx   = build_ctx(first_meta, "", config, root, workdir_assets)
-    local pages      = paginate_verbatim_blocks(vbody)
+    local ctx        = build_ctx(first_meta, vbody, config, root, workdir_assets)
+    ctx["slide_num"] = tex_escape(slide_num)
     local tpl        = load_template("verbatim")
     local compiled   = assert(etlua.compile(tpl))
-
-    for _, p in ipairs(pages) do
-      local ctx = {}
-      for k, v in pairs(base_ctx) do ctx[k] = v end
-      ctx["slide_num"] = tex_escape(slide_num)
-      ctx["left_content"] = render_body(p.left)
-      ctx["right_content"] = render_body(p.right)
-      frames[#frames+1] = compiled(ctx)
-    end
+    frames[#frames+1] = compiled(ctx)
   else
     -- Mode normal : rendre chaque variation du slide
     local variations = parse_content_file(content_md)
