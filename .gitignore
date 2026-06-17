@@ -8,6 +8,11 @@
 workdir/
 .dev
 assets/
+templates/
+scripts/
+docs/
+assets/
+
 
 # non pertinent pour la préparation de la présentation
 .dev/adr/ADR-001*
