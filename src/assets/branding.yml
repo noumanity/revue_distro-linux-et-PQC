@@ -1,0 +1,15 @@
+# --- 2 couleurs de marque (topologie) ---
+colors:
+  primary:   "#FA4D1F"   # orange noumanity
+  secondary: "#000000"   # noir
+  # Neutres techniques (toujours nécessaires, hors "2 couleurs de marque") :
+  background: "#FFFFFF"
+  foreground: "#000000"
+
+# --- 2 polices (topologie) ---
+# Arimo et ABeeZee = Google Fonts libres (embarquables sans souci).
+fonts:
+  primary:                       # CORPS (texte courant)
+    name: "Arimo"
+  secondary:                     # TITRES et emphases très fortes
+    name: "ABeeZee"

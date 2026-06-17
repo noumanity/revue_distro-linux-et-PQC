@@ -550,11 +550,26 @@ local function read_verbatim_body(path)
   return s:match("^%s*(.*%S)%s*$") or ""
 end
 
-local function format_logos(paths)
-  if not paths or #paths == 0 then return "" end
+local function parse_height_cm(h)
+  local n = tonumber((h or ""):match("([%d%.]+)cm"))
+  return n or 1.1
+end
+
+local function format_logos(logo_items)
+  if not logo_items or #logo_items == 0 then return "" end
+  -- Hauteur maximale pour aligner toutes les baselines basses au même niveau.
+  local max_h = 0
+  for _, item in ipairs(logo_items) do
+    local h = parse_height_cm(item.height)
+    if h > max_h then max_h = h end
+  end
+  local max_h_str = string.format("%.4gcm", max_h)
   local items = {}
-  for _, p in ipairs(paths) do
-    items[#items+1] = string.format("\\includegraphics[height=1.1cm]{%s}", p)
+  for _, item in ipairs(logo_items) do
+    local h = item.height or "1.1cm"
+    items[#items+1] = string.format(
+      "\\raisebox{0pt}[%s][0pt]{\\includegraphics[height=%s]{%s}}",
+      max_h_str, h, item.path)
   end
   return table.concat(items, "\\hspace{1.5em}")
 end
@@ -602,8 +617,20 @@ local function build_ctx(meta, body, config, root, workdir_assets)
   local authors = ctx["authors"] or {}
   if type(authors) == "string" then authors = { authors } end
   local auth_parts = {}
-  for _, a in ipairs(authors) do auth_parts[#auth_parts+1] = tex_escape(a) end
-  ctx["authors_formatted"] = table.concat(auth_parts, " \\\\ ")
+  for _, a in ipairs(authors) do
+    if type(a) == "table" and (a.name or a.role) then
+      local name = tex_escape(a.name or "")
+      local role = tex_escape(a.role or "")
+      if role ~= "" then
+        auth_parts[#auth_parts+1] = "\\textbf{" .. name .. "} {\\footnotesize\\itshape " .. role .. "}"
+      else
+        auth_parts[#auth_parts+1] = name
+      end
+    else
+      auth_parts[#auth_parts+1] = tex_escape(a)
+    end
+  end
+  ctx["authors_formatted"] = table.concat(auth_parts, " \\\\[0.4em] ")
 
   -- Champs texte (tex_escape gere nil et yaml.null = table -> chaine vide)
   ctx["title_tex"]    = tex_escape(ctx["title"])
@@ -611,15 +638,25 @@ local function build_ctx(meta, body, config, root, workdir_assets)
   ctx["event_tex"]    = tex_escape(ctx["event"])
   ctx["date_tex"]     = tex_escape(ctx["date"])
   ctx["demo_tex"]     = tex_escape(ctx["demo"])
+  ctx["location_tex"] = tex_escape(ctx["location"])
 
   -- Logos
   local logos_raw = ctx["logos"] or {}
-  local logo_paths = {}
+  local logo_items = {}
   for _, lr in ipairs(logos_raw) do
-    local p = resolve_asset(clean_path_str(lr), root, workdir_assets)
-    if p then logo_paths[#logo_paths+1] = p end
+    local src_raw, height
+    if type(lr) == "string" then
+      src_raw = lr
+    elseif type(lr) == "table" and lr.src then
+      src_raw = lr.src
+      height  = lr.height
+    end
+    if src_raw then
+      local p = resolve_asset(clean_path_str(src_raw), root, workdir_assets)
+      if p then logo_items[#logo_items+1] = { path = p, height = height } end
+    end
   end
-  ctx["logos_formatted"] = format_logos(logo_paths)
+  ctx["logos_formatted"] = format_logos(logo_items)
 
   -- Options de couleur du titre desactivees.
   ctx["title_color_block"] = ""

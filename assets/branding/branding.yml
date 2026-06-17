@@ -1,0 +1,43 @@
+# branding.yml
+# Jetons de marque consommés par le thème (beamerthemeNoumanity).
+# RIEN n'est codé en dur dans le template : il lit ce fichier.
+# Le template est agnostique de la marque MAIS contraint par la TOPOLOGIE ci-dessous :
+#   - 2 couleurs de marque (orange, noir)
+#   - 2 polices
+#   - 1 logo + 1 isotipo, chacun avec plusieurs variations
+# => toute marque respectant cette topologie peut réutiliser le template.
+
+brand: noumanity
+
+# --- 2 couleurs de marque (topologie) ---
+colors:
+  primary:   "#FA4D1F"   # orange noumanity
+  secondary: "#000000"   # noir
+  # Neutres techniques (toujours nécessaires, hors "2 couleurs de marque") :
+  background: "#FFFFFF"
+  foreground: "#000000"
+
+# --- 2 polices (topologie) ---
+# Arimo et ABeeZee = Google Fonts libres (embarquables sans souci).
+fonts:
+  primary:                       # CORPS (texte courant)
+    name: "Arimo"
+  secondary:                     # TITRES et emphases très fortes
+    name: "ABeeZee"
+
+# --- logo + isotipo (topologie), chacun avec ses variations ---
+# Primitives SVG UNIQUEMENT (cf. ticket 004 tâche 3 : « utilisez svg si possible »).
+# Les formats raster/PDF sont produits *lazily* au moment de la génération (workdir).
+# Ces SVG sont extraits du dépôt de marque via `imagen.sh` (workdir/imagen/scripts).
+assets:
+  base: assets/branding
+  logo:                          # mot-symbole « noumanity » (sans tagline)
+    default: logo/noumanity-logotipo-color.svg
+    variants:
+      color: logo/noumanity-logotipo-color.svg
+      white: logo/noumanity-logotipo-white.svg   # sur fond foncé
+  isotipo:                       # symbole seul (sans tagline)
+    default: isotipo/noumanity-isotipo-color.svg
+    variants:
+      color: isotipo/noumanity-isotipo-color.svg
+      white: isotipo/noumanity-isotipo-white.svg # sur fond foncé

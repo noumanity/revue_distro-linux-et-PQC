@@ -1,10 +1,11 @@
 .claude
 
+# artefacts éditeurs
+.~lock.*.docx#
+
+
 # repertoire de travail (test demo)
 workdir/
-
-# assets pour la préparation du ppt
-assets/
 
 # non pertinent pour la préparation de la présentation
 .dev/adr/ADR-001*

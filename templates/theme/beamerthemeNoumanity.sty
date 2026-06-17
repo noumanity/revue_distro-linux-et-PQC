@@ -48,9 +48,12 @@
   \setmainfont{\NouThemeBodyFont}
 }{}
 \IfFontExistsTF{\NouThemeTitleFont}{%
+  \newfontfamily\NouTitleFont{\NouThemeTitleFont}%
   \setbeamerfont{title}{family={\fontspec{\NouThemeTitleFont}}, size=\NouThemeTitleSize}
   \setbeamerfont{frametitle}{family={\fontspec{\NouThemeTitleFont}}, size=\NouThemeFrameTitleSize}
-}{}
+}{%
+  \newcommand\NouTitleFont{}%
+}
 
 % Listes : puces avec couleur de marque
 \setbeamertemplate{itemize item}{\textcolor{NoumanityOrange}{\NouThemeItemSymbol}}

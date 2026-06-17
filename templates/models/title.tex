@@ -1,28 +1,31 @@
 % Modele : title - page de titre
-% Champs obligatoires : title_tex, subtitle_tex, authors_formatted, event_tex, date_tex
-% Champs optionnels  : background_block, demo_tex, logos_formatted
+% Champs optionnels : title_tex, authors_formatted, event_tex, date_tex, location_tex, logos_formatted, background_block
 \begin{frame}[plain]
 <%- background_block %>
-\begin{tikzpicture}[remember picture, overlay]
-  \fill[NoumanityBlack, opacity=0.58]
-    (current page.south west) rectangle (current page.north east);
-\end{tikzpicture}
 
 \vfill
+{\NouTitleFont\fontsize{21}{21}\selectfont\color{NoumanityBlack}\raggedright <%- title_tex %>\par}
+\vspace{2.0em}
 \begin{center}
-  {\Large\bfseries\color{white} <%- title_tex %>\par}
-  \smallskip
-  {\normalsize\itshape\color{NoumanityOrange} <%- subtitle_tex %>\par}
-  \medskip
-  \textcolor{NoumanityOrange}{\rule{0.5\linewidth}{0.4pt}}\par
-  \medskip
-  {\small\color{white} <%- authors_formatted %>\par}
-  \smallskip
-  {\footnotesize\color{white!75!NoumanityBlack} D\'{e}mo~: <%- demo_tex %>\par}
-  \medskip
-  {\footnotesize\color{white!90!NoumanityBlack} <%- event_tex %> -- <%- date_tex %>\par}
-  \medskip
-  <%- logos_formatted %>
+  \begin{minipage}{0.85\linewidth}
+    \raggedright
+    {\small\color{NoumanityBlack} <%- authors_formatted %>\par}
+  \end{minipage}
 \end{center}
 \vfill
+\vspace{2.4cm}
+
+\begin{tikzpicture}[remember picture, overlay]
+  \node[anchor=south west, inner sep=0pt, xshift=1.4cm, yshift=0.2cm]
+    at (current page.south west) {%
+      \begin{minipage}{0.55\paperwidth}
+        \raggedright
+        {\footnotesize\color{NoumanityBlack!60}
+          <%- event_tex %> \textbullet{} <%- date_tex %>\par
+          \vspace{0.2em}
+          <%- location_tex %>}
+      \end{minipage}};
+  \node[anchor=south east, inner sep=0pt, xshift=-1.4cm, yshift=0.2cm]
+    at (current page.south east) {<%- logos_formatted %>};
+\end{tikzpicture}
 \end{frame}
